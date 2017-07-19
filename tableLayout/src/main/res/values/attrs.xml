@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TableLayout">
+        <attr name="tableMode" format="enum">
+            <enum name="auto" value="0" />
+            <enum name="equallyDivide" value="1" />
+        </attr>
+        <attr name="tableRowHeight" format="dimension" />
+        <attr name="tableDividerSize" format="dimension" />
+        <attr name="tableDividerColor" format="color" />
+        <attr name="tableColumnPadding" format="dimension" />
+        <attr name="tableTextGravity" format="enum">
+            <enum name="center" value="0" />
+            <enum name="leftCenter" value="1" />
+            <enum name="rightCenter" value="2" />
+        </attr>
+        <attr name="tableTextSize" format="dimension" />
+        <attr name="tableTextColor" format="color" />
+    </declare-styleable>
+</resources>
