@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<win.smartown.android.library.tableLayout.FreeScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,6 +9,8 @@
     <win.smartown.android.library.tableLayout.TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/white" />
+        android:background="@android:color/white"
+        app:tableColumnPadding="48dp"
+        app:tableRowHeight="100dp" />
 
-</FrameLayout>
+</win.smartown.android.library.tableLayout.FreeScrollView>

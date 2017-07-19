@@ -15,11 +15,18 @@ import java.util.ArrayList;
 public class TableColumn extends LinearLayout {
 
     private Callback callback;
+    private float maxTextViewWidth;
 
     public TableColumn(Context context, Callback callback) {
         super(context);
         this.callback = callback;
         init();
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension((int) (callback.getTableLayout().getTableColumnPadding() * 2 + maxTextViewWidth), callback.getTableLayout().getTableRowHeight() * getChildCount());
     }
 
     private void init() {
@@ -32,8 +39,7 @@ public class TableColumn extends LinearLayout {
     }
 
     private void initContent() {
-        float maxTextViewWidth = 0;
-
+        maxTextViewWidth = 0;
         String[] texts = {"a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa"};
         ArrayList<TextView> textViews = new ArrayList<>();
         for (String text : texts) {

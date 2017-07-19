@@ -9,6 +9,8 @@ import android.graphics.Paint;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.LinearLayout;
 
 /**
@@ -77,10 +79,34 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
             tableTextSize = (int) Util.dip2px(getResources(), 12);
             tableTextColor = Color.GRAY;
         }
-        if (isInEditMode()) {
-            addView(new TableColumn(getContext(), this));
-            addView(new TableColumn(getContext(), this));
+//        if (isInEditMode()) {
+        addView(new TableColumn(getContext(), this));
+        addView(new TableColumn(getContext(), this));
+        addView(new TableColumn(getContext(), this));
+        addView(new TableColumn(getContext(), this));
+        addView(new TableColumn(getContext(), this));
+        addView(new TableColumn(getContext(), this));
+        addView(new TableColumn(getContext(), this));
+//        }
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int width = 0;
+        int height = 0;
+        int childCount = getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View child = getChildAt(i);
+            width += child.getMeasuredWidth();
+            height = Math.max(height, child.getMeasuredHeight());
         }
+        setMeasuredDimension(width, height);
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return true;
     }
 
     @Override
@@ -95,9 +121,9 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
             maxRowCount = Math.max(maxRowCount, column.getChildCount());
             if (i > 0) {
                 if (tableDividerSize > 1) {
-                    canvas.drawRect(drawnWidth - tableDividerSize / 2, 0, drawnWidth + tableDividerSize / 2, getHeight(), paint);
+                    canvas.drawRect(drawnWidth - tableDividerSize / 2, 0, drawnWidth + tableDividerSize / 2, getMeasuredHeight(), paint);
                 } else {
-                    canvas.drawRect(drawnWidth - tableDividerSize, 0, drawnWidth, getHeight(), paint);
+                    canvas.drawRect(drawnWidth - tableDividerSize, 0, drawnWidth, getMeasuredHeight(), paint);
                 }
             }
             drawnWidth += column.getWidth();
@@ -105,9 +131,9 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
         for (int i = 1; i < maxRowCount; i++) {
             float y = i * tableRowHeight;
             if (tableDividerSize > 1) {
-                canvas.drawRect(0, y - tableDividerSize / 2, getWidth(), y + tableDividerSize / 2, paint);
+                canvas.drawRect(0, y - tableDividerSize / 2, getMeasuredWidth(), y + tableDividerSize / 2, paint);
             } else {
-                canvas.drawRect(0, y - tableDividerSize, getWidth(), y, paint);
+                canvas.drawRect(0, y - tableDividerSize, getMeasuredWidth(), y, paint);
             }
         }
     }
