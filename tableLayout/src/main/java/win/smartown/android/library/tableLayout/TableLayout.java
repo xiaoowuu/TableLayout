@@ -26,6 +26,7 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
     private int tableTextGravity;
     private int tableTextSize;
     private int tableTextColor;
+    private TableAdapter adapter;
 
     private Paint paint;
 
@@ -79,15 +80,16 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
             tableTextSize = (int) Util.dip2px(getResources(), 12);
             tableTextColor = Color.GRAY;
         }
-//        if (isInEditMode()) {
-        addView(new TableColumn(getContext(), this));
-        addView(new TableColumn(getContext(), this));
-        addView(new TableColumn(getContext(), this));
-        addView(new TableColumn(getContext(), this));
-        addView(new TableColumn(getContext(), this));
-        addView(new TableColumn(getContext(), this));
-        addView(new TableColumn(getContext(), this));
-//        }
+        if (isInEditMode()) {
+            String[] content = {"a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa"};
+            addView(new TableColumn(getContext(), content, this));
+            addView(new TableColumn(getContext(), content, this));
+            addView(new TableColumn(getContext(), content, this));
+            addView(new TableColumn(getContext(), content, this));
+            addView(new TableColumn(getContext(), content, this));
+            addView(new TableColumn(getContext(), content, this));
+            addView(new TableColumn(getContext(), content, this));
+        }
     }
 
     @Override
@@ -175,4 +177,16 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
         return tableTextColor;
     }
 
+    public void setAdapter(TableAdapter adapter) {
+        this.adapter = adapter;
+        useAdapter();
+    }
+
+    private void useAdapter() {
+        removeAllViews();
+        int count = adapter.getColumnCount();
+        for (int i = 0; i < count; i++) {
+            addView(new TableColumn(getContext(), adapter.getColumnContent(i), this));
+        }
+    }
 }

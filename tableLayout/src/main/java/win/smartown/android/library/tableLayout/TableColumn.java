@@ -14,11 +14,13 @@ import java.util.ArrayList;
  */
 public class TableColumn extends LinearLayout {
 
+    private String[] content;
     private Callback callback;
     private float maxTextViewWidth;
 
-    public TableColumn(Context context, Callback callback) {
+    public TableColumn(Context context, String[] content, Callback callback) {
         super(context);
+        this.content = content;
         this.callback = callback;
         init();
     }
@@ -40,9 +42,8 @@ public class TableColumn extends LinearLayout {
 
     private void initContent() {
         maxTextViewWidth = 0;
-        String[] texts = {"a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa"};
         ArrayList<TextView> textViews = new ArrayList<>();
-        for (String text : texts) {
+        for (String text : content) {
             TextView textView = new TextView(getContext());
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, callback.getTableLayout().getTableTextSize());
             textView.setTextColor(callback.getTableLayout().getTableTextColor());

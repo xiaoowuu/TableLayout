@@ -7,10 +7,11 @@
     tools:context="win.smartown.android.app.tablelayout.MainActivity">
 
     <win.smartown.android.library.tableLayout.TableLayout
+        android:id="@+id/main_table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        app:tableColumnPadding="48dp"
-        app:tableRowHeight="100dp" />
+        app:tableColumnPadding="16dp"
+        app:tableRowHeight="48dp" />
 
 </win.smartown.android.library.tableLayout.FreeScrollView>
