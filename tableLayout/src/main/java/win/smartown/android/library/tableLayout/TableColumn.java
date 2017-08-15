@@ -74,6 +74,9 @@ public class TableColumn extends LinearLayout {
         for (int i = 0; i < childCount; i++) {
             TextView textView = (TextView) getChildAt(i);
             if (textView.getBottom() >= y) {
+                if (i == 0) {
+                    return;
+                }
                 textView.setSelected(!textView.isSelected());
                 textView.setBackgroundColor(textView.isSelected() ? callback.getTableLayout().getBackgroundColorSelected() : Color.TRANSPARENT);
                 textView.setTextColor(textView.isSelected() ? callback.getTableLayout().getTableTextColorSelected() : callback.getTableLayout().getTableTextColor());

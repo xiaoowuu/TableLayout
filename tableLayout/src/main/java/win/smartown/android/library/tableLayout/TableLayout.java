@@ -213,6 +213,9 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
         for (int i = 0; i < childCount; i++) {
             TableColumn tableColumn = (TableColumn) getChildAt(i);
             if (tableColumn.getRight() >= x) {
+                if (i==0){
+                    return;
+                }
                 tableColumn.onClick(y);
                 return;
             }
