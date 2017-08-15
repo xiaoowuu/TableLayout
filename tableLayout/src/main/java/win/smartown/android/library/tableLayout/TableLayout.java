@@ -26,6 +26,8 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
     private int tableTextGravity;
     private int tableTextSize;
     private int tableTextColor;
+    private int tableTextColorSelected;
+    private int backgroundColorSelected;
     private TableAdapter adapter;
 
     private Paint paint;
@@ -69,6 +71,8 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
             tableTextGravity = typedArray.getInt(R.styleable.TableLayout_tableTextGravity, 0);
             tableTextSize = typedArray.getDimensionPixelSize(R.styleable.TableLayout_tableTextSize, (int) Util.dip2px(getResources(), 12));
             tableTextColor = typedArray.getColor(R.styleable.TableLayout_tableTextColor, Color.GRAY);
+            tableTextColorSelected = typedArray.getColor(R.styleable.TableLayout_tableTextColorSelected, Color.BLACK);
+            backgroundColorSelected = typedArray.getColor(R.styleable.TableLayout_backgroundColorSelected, Color.TRANSPARENT);
             typedArray.recycle();
         } else {
             tableMode = 0;
@@ -79,6 +83,8 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
             tableTextGravity = 0;
             tableTextSize = (int) Util.dip2px(getResources(), 12);
             tableTextColor = Color.GRAY;
+            tableTextColorSelected = Color.BLACK;
+            backgroundColorSelected = Color.TRANSPARENT;
         }
         if (isInEditMode()) {
             String[] content = {"a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa"};
@@ -123,9 +129,9 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
             maxRowCount = Math.max(maxRowCount, column.getChildCount());
             if (i > 0) {
                 if (tableDividerSize > 1) {
-                    canvas.drawRect(drawnWidth - tableDividerSize / 2, 0, drawnWidth + tableDividerSize / 2, getMeasuredHeight(), paint);
+                    canvas.drawRect(drawnWidth - tableDividerSize / 2, 0, drawnWidth + tableDividerSize / 2, getHeight(), paint);
                 } else {
-                    canvas.drawRect(drawnWidth - tableDividerSize, 0, drawnWidth, getMeasuredHeight(), paint);
+                    canvas.drawRect(drawnWidth - tableDividerSize, 0, drawnWidth, getHeight(), paint);
                 }
             }
             drawnWidth += column.getWidth();
@@ -133,11 +139,15 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
         for (int i = 1; i < maxRowCount; i++) {
             float y = i * tableRowHeight;
             if (tableDividerSize > 1) {
-                canvas.drawRect(0, y - tableDividerSize / 2, getMeasuredWidth(), y + tableDividerSize / 2, paint);
+                canvas.drawRect(0, y - tableDividerSize / 2, getWidth(), y + tableDividerSize / 2, paint);
             } else {
-                canvas.drawRect(0, y - tableDividerSize, getMeasuredWidth(), y, paint);
+                canvas.drawRect(0, y - tableDividerSize, getWidth(), y, paint);
             }
         }
+        canvas.drawRect(0, 0, tableDividerSize, getHeight(), paint);
+        canvas.drawRect(getWidth() - tableDividerSize, 0, getWidth(), getHeight(), paint);
+        canvas.drawRect(0, 0, getWidth(), tableDividerSize, paint);
+        canvas.drawRect(0, getHeight() - tableDividerSize, getWidth(), getHeight(), paint);
     }
 
     @Override
@@ -177,6 +187,14 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
         return tableTextColor;
     }
 
+    public int getTableTextColorSelected() {
+        return tableTextColorSelected;
+    }
+
+    public int getBackgroundColorSelected() {
+        return backgroundColorSelected;
+    }
+
     public void setAdapter(TableAdapter adapter) {
         this.adapter = adapter;
         useAdapter();
@@ -187,6 +205,17 @@ public class TableLayout extends LinearLayout implements TableColumn.Callback {
         int count = adapter.getColumnCount();
         for (int i = 0; i < count; i++) {
             addView(new TableColumn(getContext(), adapter.getColumnContent(i), this));
+        }
+    }
+
+    public void onClick(float x, float y) {
+        int childCount = getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            TableColumn tableColumn = (TableColumn) getChildAt(i);
+            if (tableColumn.getRight() >= x) {
+                tableColumn.onClick(y);
+                return;
+            }
         }
     }
 }

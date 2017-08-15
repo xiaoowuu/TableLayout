@@ -14,7 +14,6 @@ import android.widget.FrameLayout;
  */
 public class FreeScrollView extends FrameLayout {
 
-    private int scaledTouchSlop;
     private GestureDetector gestureDetector;
 
     public FreeScrollView(Context context) {
@@ -52,12 +51,54 @@ public class FreeScrollView extends FrameLayout {
 
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
+                View view = getChildAt(0);
+                if (view instanceof TableLayout) {
+                    ((TableLayout) view).onClick(e.getX() + getScrollX(), e.getY() + getScrollY());
+                }
                 return false;
             }
 
             @Override
             public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-                getChildAt(0).scrollBy((int) distanceX, (int) distanceY);
+                View view = getChildAt(0);
+                int childHeight = view.getHeight();
+                int childWidth = view.getWidth();
+                int toX, toY;
+                if (distanceX > 0) {
+                    if (childWidth > getWidth()) {
+                        if (getScrollX() + getWidth() >= childWidth) {
+                            toX = childWidth - getWidth();
+                        } else {
+                            toX = (int) (getScrollX() + distanceX);
+                        }
+                    } else {
+                        toX = 0;
+                    }
+                } else {
+                    if (getScrollX() + distanceX < 0) {
+                        toX = 0;
+                    } else {
+                        toX = (int) (getScrollX() + distanceX);
+                    }
+                }
+                if (distanceY > 0) {
+                    if (childHeight > getHeight()) {
+                        if (getScrollY() + getHeight() >= childHeight) {
+                            toY = childHeight - getHeight();
+                        } else {
+                            toY = (int) (getScrollY() + distanceY);
+                        }
+                    } else {
+                        toY = 0;
+                    }
+                } else {
+                    if (getScrollY() + distanceY < 0) {
+                        toY = 0;
+                    } else {
+                        toY = (int) (getScrollY() + distanceY);
+                    }
+                }
+                scrollTo(toX, toY);
                 return false;
             }
 
@@ -68,43 +109,13 @@ public class FreeScrollView extends FrameLayout {
 
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-//                int returnX = 0;
-//                int returnY = 0;
-//                View child = getChildAt(0);
-//                if (child.getScrollX() < 0) {
-//                    returnX = -child.getScrollX();
-//                } else if (child.getScrollX() + getWidth() > child.getMeasuredWidth()) {
-//                    returnX = child.getMeasuredWidth() - child.getScrollX() - getWidth();
-//                }
-//                if (child.getScrollY() < 0) {
-//                    returnY = -child.getScrollY();
-//                } else if (child.getScrollY() + getHeight() > child.getMeasuredHeight()) {
-//                    returnY = child.getMeasuredHeight() - child.getScrollY() - getHeight();
-//                }
-//                scrollBy(returnX, returnY);
                 return false;
             }
         });
     }
 
-    private float startX;
-    private float startY;
-
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-//        scaledTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
-//        int action = ev.getAction();
-//        switch (action) {
-//            case MotionEvent.ACTION_DOWN:
-//                startX = ev.getX();
-//                startY = ev.getY();
-//                break;
-//            case MotionEvent.ACTION_MOVE:
-//                float deltaX = startX - ev.getX();
-//                float deltaY = startY - ev.getY();
-//                return Math.abs(deltaX) >= scaledTouchSlop || Math.abs(deltaY) > scaledTouchSlop;
-//        }
-//
         return true;
     }
 
@@ -113,6 +124,5 @@ public class FreeScrollView extends FrameLayout {
         gestureDetector.onTouchEvent(event);
         return true;
     }
-
 
 }

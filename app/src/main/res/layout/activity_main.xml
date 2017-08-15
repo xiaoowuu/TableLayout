@@ -11,7 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        app:tableColumnPadding="16dp"
-        app:tableRowHeight="48dp" />
+        app:backgroundColorSelected="@color/colorAccent"
+        app:tableColumnPadding="32dp"
+        app:tableDividerColor="#ccc"
+        app:tableDividerSize="1dp"
+        app:tableRowHeight="48dp"
+        app:tableTextColor="#333"
+        app:tableTextColorSelected="#fff"
+        app:tableTextSize="14dp" />
 
 </win.smartown.android.library.tableLayout.FreeScrollView>

@@ -1,6 +1,7 @@
 package win.smartown.android.library.tableLayout;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -34,13 +35,12 @@ public class TableColumn extends LinearLayout {
     private void init() {
         Log.i("TableColumn", "init");
         setOrientation(VERTICAL);
-        int padding = callback.getTableLayout().getTableColumnPadding();
-        setPadding(padding, 0, padding, 0);
 
         initContent();
     }
 
     private void initContent() {
+        int padding = callback.getTableLayout().getTableColumnPadding();
         maxTextViewWidth = 0;
         ArrayList<TextView> textViews = new ArrayList<>();
         for (String text : content) {
@@ -49,10 +49,11 @@ public class TableColumn extends LinearLayout {
             textView.setTextColor(callback.getTableLayout().getTableTextColor());
             maxTextViewWidth = Math.max(maxTextViewWidth, Util.measureTextViewWidth(textView, text));
             textView.setGravity(getTextGravity(callback.getTableLayout().getTableTextGravity()));
+            textView.setPadding(padding, 0, padding, 0);
             textView.setText(text);
             textViews.add(textView);
         }
-        LayoutParams layoutParams = new LayoutParams((int) maxTextViewWidth, callback.getTableLayout().getTableRowHeight());
+        LayoutParams layoutParams = new LayoutParams((int) (padding * 2 + maxTextViewWidth), callback.getTableLayout().getTableRowHeight());
         for (TextView textView : textViews) {
             addView(textView, layoutParams);
         }
@@ -66,6 +67,19 @@ public class TableColumn extends LinearLayout {
                 return Gravity.CENTER_VERTICAL | Gravity.RIGHT;
         }
         return Gravity.CENTER;
+    }
+
+    public void onClick(float y) {
+        int childCount = getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            TextView textView = (TextView) getChildAt(i);
+            if (textView.getBottom() >= y) {
+                textView.setSelected(!textView.isSelected());
+                textView.setBackgroundColor(textView.isSelected() ? callback.getTableLayout().getBackgroundColorSelected() : Color.TRANSPARENT);
+                textView.setTextColor(textView.isSelected() ? callback.getTableLayout().getTableTextColorSelected() : callback.getTableLayout().getTableTextColor());
+                return;
+            }
+        }
     }
 
     public interface Callback {

@@ -16,5 +16,7 @@
         </attr>
         <attr name="tableTextSize" format="dimension" />
         <attr name="tableTextColor" format="color" />
+        <attr name="tableTextColorSelected" format="color" />
+        <attr name="backgroundColorSelected" format="color" />
     </declare-styleable>
 </resources>

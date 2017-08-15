@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String newRandomNumber() {
-        return (new Random(50).nextInt() + 50) + "";
+        return (new Random().nextInt(50) + 50) + "";
     }
 
     public static class Content {
