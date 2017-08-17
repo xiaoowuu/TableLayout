@@ -37,6 +37,14 @@ public class FreeScrollView extends FrameLayout {
         init();
     }
 
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        if (getChildCount() != 1) {
+            throw new RuntimeException("FreeScrollView must contain only one child!");
+        }
+    }
+
     private void init() {
         gestureDetector = new GestureDetector(getContext(), new GestureDetector.OnGestureListener() {
             @Override
