@@ -1,9 +1,3 @@
-### 2017年8月15日更新
-> ##### 升级版 [TableLayout](https://github.com/smartown/TableLayout)
-> 针对简友的反馈，在[TableView](https://github.com/smartown/TableView)的基础上做了一些小的提升：
-> - 内容超出屏幕范围可以滑动显示
-> - 单元格可被选中 
-
 ##### 在编辑模式下预览，可以看出修改不同属性产生的变化
 ![编辑模式预览](http://upload-images.jianshu.io/upload_images/1951791-2dc4834072e6421b.gif?imageMogr2/auto-orient/strip)
 
@@ -221,4 +215,5 @@ dependencies {
 ##### Github
 - [TableLayout](https://github.com/smartown/TableLayout)
 - [TableView](https://github.com/smartown/TableView)
+
 ![TableView](http://upload-images.jianshu.io/upload_images/1951791-53e9b9f852e53ede.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
