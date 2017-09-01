@@ -2,6 +2,7 @@ package win.smartown.android.library.tableLayout;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -44,6 +45,9 @@ public class TableColumn extends LinearLayout {
         maxTextViewWidth = 0;
         ArrayList<TextView> textViews = new ArrayList<>();
         for (String text : content) {
+            if (TextUtils.isEmpty(text)) {
+                text = "";
+            }
             TextView textView = new TextView(getContext());
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, callback.getTableLayout().getTableTextSize());
             textView.setTextColor(callback.getTableLayout().getTableTextColor());
