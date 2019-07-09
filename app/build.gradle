@@ -1,12 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 28
     defaultConfig {
         applicationId "win.smartown.android.app.tablelayout"
-        minSdkVersion 9
-        targetSdkVersion 25
+        minSdkVersion 14
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
@@ -19,6 +18,6 @@ android {
 }
 
 dependencies {
-    compile project(':tableLayout')
-    compile 'com.android.support:appcompat-v7:25.2.0'
+    implementation project(':tableLayout')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
 }
