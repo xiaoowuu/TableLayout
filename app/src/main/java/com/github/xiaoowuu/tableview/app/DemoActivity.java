@@ -1,4 +1,4 @@
-package win.smartown.android.app.tablelayout;
+package com.github.xiaoowuu.tableview.app;
 
 import android.os.Bundle;
 

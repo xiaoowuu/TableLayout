@@ -1,4 +1,4 @@
-package com.github.xiaoowuu.tablelayout;
+package com.github.xiaoowuu.tableview;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 
 import java.util.Locale;
 
-import win.smartown.android.library.tableLayout.R;
 
 /**
  * @author xiaoowuu
@@ -106,6 +105,7 @@ public class TableView extends ViewGroup implements GestureDetector.OnGestureLis
             }
         }
     }
+
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {

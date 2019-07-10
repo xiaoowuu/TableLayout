@@ -2,7 +2,7 @@
 <merge xmlns:tools="http://schemas.android.com/tools"
     tools:parentTag="android.widget.FrameLayout">
 
-    <com.github.xiaoowuu.tablelayout.TableView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.github.xiaoowuu.tableview.TableView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/main_table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
