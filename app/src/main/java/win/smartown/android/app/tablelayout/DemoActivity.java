@@ -1,20 +1,18 @@
 package win.smartown.android.app.tablelayout;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * @author xiaoowuu
+ */
+public class DemoActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
-
-    public void click(View view) {
-        startActivity(new Intent(this, DemoActivity.class));
+        setContentView(R.layout.activity_demo);
     }
 }
