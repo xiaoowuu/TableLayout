@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="TableView">
+    <declare-styleable name="TableLayout">
         <attr name="tableMode" format="enum">
             <enum name="auto" value="0" />
             <enum name="equallyDivide" value="1" />

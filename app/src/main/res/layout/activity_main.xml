@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:parentTag="android.widget.FrameLayout">
+<win.smartown.android.library.tableLayout.FreeScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="win.smartown.android.app.tablelayout.MainActivity">
 
-    <Button
-        android:text="click"
-        android:onClick="click"
+    <win.smartown.android.library.tableLayout.TableLayout
+        android:id="@+id/main_table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-</merge>
+        android:background="@android:color/white"
+        app:backgroundColorSelected="@color/colorAccent"
+        app:tableColumnPadding="32dp"
+        app:tableDividerColor="#ddd"
+        app:tableDividerSize="1px"
+        app:tableRowHeight="48dp"
+        app:tableTextColor="#333"
+        app:tableTextColorSelected="#fff"
+        app:tableTextSize="14dp" />
+
+</win.smartown.android.library.tableLayout.FreeScrollView>
